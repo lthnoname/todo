@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>To-do List</title>
+    <style>
+        body { font-family: Arial; display: flex; justify-content: center; background: #f4f4f4; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; }
+        ul { list-style: none; padding: 0; }
+        li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .delete-btn { color: red; text-decoration: none; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>My Tasks</h2>
+    <form th:action="@{/add}" method="post">
+        <input type="text" name="title" placeholder="New task..." required>
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        <li th:each="todo : ${todos}">
+            <span th:text="${todo.title}"></span>
+            <a th:href="@{'/delete/' + ${todo.id}}" class="delete-btn">Delete</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
